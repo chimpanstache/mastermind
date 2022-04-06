@@ -16,12 +16,8 @@ class Game
 
   def same_color
     comp = @game.zip(@guess)
-    @feedback[:white] = comp.delete_if { |sub_arr| sub_arr.uniq.length == 1 }.count
-    # comp = comp.delete_if { |sub_arr| sub_arr.uniq.length == 1 }
-    # comp = comp.group_by{|i| i}.map{|k,v| [k, v.count] }
-    # puts "comp array : #{comp} ###############"
-    # comp = Hash[*comp.flatten]
-    # @feedback[:white] = comp.reject { |_,v| v == 1}.size
+    h = comp.delete_if { |sub_arr| sub_arr.uniq.length == 1 }.flatten.tally
+    feedback[:white] = h.delete_if { |_k, v| v < 2 }.count
   end
 
   def same_color_place
