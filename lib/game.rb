@@ -15,8 +15,8 @@ class Game
   end
 
   def same_color
-    comp = @game.zip(@guess)
-    h = comp.delete_if { |sub_arr| sub_arr.uniq.length == 1 }.uniq.flatten.tally
+    comp = @game.uniq.zip(@guess.uniq)
+    h = comp.delete_if { |sub_arr| sub_arr.uniq.length == 1 }.flatten.tally
     feedback[:white] = h.delete_if { |_k, v| v < 2 }.count
   end
 
