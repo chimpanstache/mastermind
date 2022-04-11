@@ -14,13 +14,24 @@ class Game
     @guess = input.split(' ')
   end
 
-  def same_color
-    comp = @game.uniq.zip(@guess.uniq)
-    h = comp.delete_if { |sub_arr| sub_arr.uniq.length == 1 }.flatten.tally
-    feedback[:white] = h.delete_if { |_k, v| v < 2 }.count
+  def white_count
+    game_temp = @game
+    guess_temp = @guess
+    comp = game_temp.zip(guess_temp)
+    comp = comp.delete_if { |sub_arr| sub_arr.uniq.length == 1 }
+    comp = comp.transpose
+    game_temp = comp[0]
+    guess_temp = comp[1]
+    i = guess_temp.size
+
+    until game_temp.empty?
+      guess_temp.delete_at(guess_temp.index(game_temp[0]) || guess_temp.length)
+      game_temp.delete_at(0)
+    end
+    @feedback[:white] = i - guess_temp.size
   end
 
-  def same_color_place
+  def black_count
     comp = @game.zip(@guess)
     length_arr = []
     comp.map { |sub_arr| length_arr.push(sub_arr.uniq.length) }
@@ -28,8 +39,8 @@ class Game
   end
 
   def compare_arrays
-    same_color_place
-    same_color
+    black_count
+    white_count
   end
 
   def game_cheat
