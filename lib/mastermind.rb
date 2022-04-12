@@ -1,10 +1,4 @@
-module MasterMind
-  # COLORS = [ "blu",
-  #   "gre",
-  #   "red",
-  #   "gol",
-  #   "pur",
-  #   "bro" ] 
+class Mastermind
 
       COLORS = [ "a",
     "b",
@@ -13,8 +7,7 @@ module MasterMind
     "e",
     "f" ] 
 
-  FEEDBACK = [
-    "white",
-    "black"
-  ]
+    @@guess = ""
+    @@game = COLORS.sample(4)
+    @@feedback = { "black": 0, "white": 0 }
 end
