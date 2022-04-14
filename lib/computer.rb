@@ -18,14 +18,14 @@ class Computer < Mastermind
   end
 
   def guessing_algorithm
-
+    
   end
     
   def make_a_guess
     if "beginning of party" 
-      @first_guess = COLORS.sample(4)
+      @guess = COLORS.sample(4)
     else
-      @first_guess = guessing_algorithm      
+      @guess = guessing_algorithm      
     end
   end
 
