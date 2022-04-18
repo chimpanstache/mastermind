@@ -3,9 +3,6 @@ require_relative 'computer'
 require_relative 'game_logic'
 
 class GameEngine < Mastermind
-  def parse_input(input)
-    @@guess = input.split(' ')
-  end
 
   def game_cheat
     puts "cheat : #{@@game[0]} | #{@@game[1]} | #{@@game[2]} | #{@@game[3]} "
@@ -13,7 +10,7 @@ class GameEngine < Mastermind
 
   def output
     puts "#{@@guess[0]} | #{@@guess[1]} | #{@@guess[2]} | #{@@guess[3]} " +
-         ">>> black : #{@@feedback[:black]}, white : #{@@feedback[:white]}"
+         ">>> black : #{@@score.count('B')}, white : #{@@score.count('W')}"
   end
 
   def guesser_or_creator
@@ -24,32 +21,34 @@ class GameEngine < Mastermind
   def play_guesser
     puts "choose your combination :"
     10.times do
-      user_input = gets.chomp
-      parse_input(user_input)
+      @@guess = gets.chomp
       GameLogic.round_play
       game_cheat
       output
-      if @@feedback[:black] == 4
+      if @@score == "BBBB"
         puts 'You win!'
         break
       end
     end
-    puts 'You lost!' if @@feedback[:black] != 4
+    puts 'You lost!' if @@score != "BBBB"
   end
 
   def play_creator
     puts "choose the combination the computer will have to guess :"
     @@game = gets.chomp
-    computer = Computer.init
+    computer = Computer.new
     10.times do
       computer.play
+      game_cheat
       output
-      if @@feedback[:black] == 4
+      if @@score == "BBBB"
+        sleep(1)
         puts 'Computer wins!'
-        break
+        return
       end
     end
-    puts 'You win!' if @@feedback[:black] != 4
+    sleep(1)
+    puts 'You win!' if @@score != "BBBB"
   end
 
   def play

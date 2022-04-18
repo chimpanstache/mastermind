@@ -1,8 +1,8 @@
 require_relative 'spec_helper'
-require_relative '../lib/game'
+require_relative '../lib/game_logic'
 require 'byebug'
 
-RSpec.describe Game do
+RSpec.describe GameLogic do
   describe '#black_count' do
     context 'there is no match between user input and game' do
       game = Game.new
