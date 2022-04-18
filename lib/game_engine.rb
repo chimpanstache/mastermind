@@ -20,9 +20,10 @@ class GameEngine < Mastermind
 
   def play_guesser
     puts "choose your combination :"
+    computer = Computer.new
     10.times do
       @@guess = gets.chomp
-      GameLogic.round_play
+      @@score = computer.calculate_score(@@guess, @@game)
       output
       if @@score == "BBBB"
         puts 'You win!'
@@ -35,6 +36,7 @@ class GameEngine < Mastermind
   def play_creator
     puts "choose the combination the computer will have to guess :"
     @@game = gets.chomp
+    puts "loading..."
     computer = Computer.new
     10.times do
       computer.play

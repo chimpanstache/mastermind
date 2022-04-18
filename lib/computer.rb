@@ -4,7 +4,6 @@ require 'set'
 class Computer < Mastermind
 
   def initialize
-    puts "loading..."
     colors = "123456".chars
     @all_answers = colors.product(*[colors] * 3).map(&:join)
     @all_scores = Hash.new { |h, k| h[k] = {} }
