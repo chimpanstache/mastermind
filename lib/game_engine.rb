@@ -1,6 +1,5 @@
 require_relative 'mastermind'
 require_relative 'computer'
-require_relative 'game_logic'
 
 class GameEngine < Mastermind
 

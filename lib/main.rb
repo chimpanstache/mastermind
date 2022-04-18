@@ -1,5 +1,4 @@
 require_relative "game_engine"
-require_relative "game_logic"
 require_relative "mastermind"
 
 game = GameEngine.new
