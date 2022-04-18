@@ -23,7 +23,6 @@ class GameEngine < Mastermind
     10.times do
       @@guess = gets.chomp
       GameLogic.round_play
-      game_cheat
       output
       if @@score == "BBBB"
         puts 'You win!'

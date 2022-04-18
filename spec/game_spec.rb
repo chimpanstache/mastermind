@@ -3,106 +3,94 @@ require_relative '../lib/game_logic'
 require 'byebug'
 
 RSpec.describe GameLogic do
-  describe '#black_count' do
+  describe '#calculate_score' do
     context 'there is no match between user input and game' do
-      game = Game.new
-      game.init
-      game.game = %w[a b c d]
-      game.guess = %w[c d e a]
-      it 'returns @feedback[:black] equal to 0' do
-        expect(game.black_count).to eq(0)
+      game = GameLogic.new
+      answer = "1234"
+      guess = "3451"
+      it 'score equals WWW' do
+        expect(game.calculate_score(guess, answer)).to eq("WWW")
       end
     end
 
     context 'there is a single match between user input and game' do
-      game = Game.new
-      game.init
-      game.game = %w[a b c d]
-      game.guess = %w[c d e d]
-      it 'returns @feedback[:black] equal to 1' do
-        expect(game.black_count).to eq(1)
+      game = GameLogic.new
+      answer = "1234"
+      guess = "3454"
+      it 'score equals BW' do
+        expect(game.calculate_score(guess, answer)).to eq("BW")
       end
     end
 
     context 'there is two match between user input and game' do
-      game = Game.new
-      game.init
-      game.game = %w[a d c d]
-      game.guess = %w[c d e d]
-      it 'returns @feedback[:black] equal to 2' do
-        expect(game.black_count).to eq(2)
+      game = GameLogic.new
+      answer = "1434"
+      guess = "3454"
+      it 'score equals BBW' do
+        expect(game.calculate_score(guess, answer)).to eq("BBW")
       end
     end
 
     context 'there is three match between user input and game' do
-      game = Game.new
-      game.init
-      game.game = %w[a b c d]
-      game.guess = %w[a e c d]
-      it 'returns @feedback[:black] equal to 3' do
-        expect(game.black_count).to eq(3)
+      game = GameLogic.new
+      answer = "1234"
+      guess = "1534"
+      it 'score equals BBB' do
+        expect(game.calculate_score(guess, answer)).to eq("BBB")
       end
     end
 
     context 'there is 4 match between user input and game' do
-      game = Game.new
-      game.init
-      game.game = %w[a e c d]
-      game.guess = %w[a e c d]
-      it 'returns @feedback[:black] equal to 4' do
-        expect(game.black_count).to eq(4)
+      game = GameLogic.new
+      answer = "1534"
+      guess = "1534"
+      it 'score equals BBBB' do
+        expect(game.calculate_score(guess, answer)).to eq("BBBB")
       end
-    end
-  end
+    end       
 
-  describe '#white_count' do
     context 'there is no match between user input and game' do
-      game = Game.new
-      game.init
-      game.game = %w[b b c d]
-      game.guess = %w[a a e f]
-      it 'returns @feedback[:white] equal to 0' do
-        expect(game.white_count).to eq(0)
+      game = GameLogic.new
+      answer = "2234"
+      guess = "1156"
+      it 'score equals nothing' do
+        expect(game.calculate_score(guess, answer)).to eq("")
       end
     end
 
     context 'there is a single match between user input and game' do
-      game = Game.new
-      game.init
-      game.game = %w[a a c d]
-      game.guess = %w[c e e f]
-      it 'returns @feedback[:white] equal to 1' do
-        expect(game.white_count).to eq(1)
+      game = GameLogic.new
+      answer = "1134"
+      guess = "3556"
+      it 'score equals W' do
+        expect(game.calculate_score(guess, answer)).to eq("W")
       end
     end
 
     context 'there is two match between user input and game' do
-      game = Game.new
-      game.init
-      game.game = %w[a d c d]
-      game.guess = %w[e c b a]
-      it 'returns @feedback[:white] equal to 2' do
-        expect(game.white_count).to eq(2)
+      game = GameLogic.new
+      answer = "1434"
+      guess = "5321"
+      it 'score equals WW' do
+        expect(game.calculate_score(guess, answer)).to eq("WW")
       end
     end
 
     context 'there is three match between user input and game' do
-      game = Game.new
-      game.init
-      game.game = %w[a b c d]
-      game.guess = %w[b a e c]
-      it 'returns @feedback[:white] equal to 3' do
-        expect(game.white_count).to eq(3)
+      game = GameLogic.new
+      answer = "1234"
+      guess = "2153"
+      it 'score equals WWW' do
+        expect(game.calculate_score(guess, answer)).to eq("WWW")
       end
     end
 
     context 'there is 4 match between user input and game' do
-      game = Game.new
-      game.init
-      game.game = %w[a e c d]
-      game.guess = %w[d c e a]
-      it 'returns @feedback[:white] equal to 4' do
-        expect(game.white_count).to eq(4)
+      game = GameLogic.new
+      answer = "1534"
+      guess = "4351"
+      it 'score equals WWWW' do
+        expect(game.calculate_score(guess, answer)).to eq("WWWW")
       end
     end
   end

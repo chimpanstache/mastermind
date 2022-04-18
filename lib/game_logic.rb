@@ -4,7 +4,7 @@ require 'byebug'
 class GameLogic < Mastermind
   attr_accessor :game, :feedback, :guess
 
-  def self.calculate_score(guess, answer)
+  def calculate_score(guess, answer)
     score = ""
     wrong_guess_pegs, wrong_answer_pegs = [], []
     peg_pairs = guess.chars.zip(answer.chars)
