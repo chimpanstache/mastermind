@@ -1,3 +1,5 @@
+require 'set'
+require 'byebug'
 class TutoAlgo
 
   def initialize
@@ -5,7 +7,7 @@ class TutoAlgo
     @all_answers = colors.product(*[colors] * 3).map(&:join)
     @all_scores = Hash.new { |h, k| h[k] = {} }
   
-    @all_answers.produt(@all_answers).each do |guess, answer|
+    @all_answers.product(@all_answers).each do |guess, answer|
       @all_scores[guess][answer] = calculate_score(guess, answer)
     end
 
@@ -52,18 +54,44 @@ class TutoAlgo
         score << "W"
       end
     end
+    score
   end
 
-  def make_a_guess
+  # def make_a_guess
+  #   if @guesses > 0
+  #     puts "Score: #{@score}"
+  #   else
+  #     puts
+  #   end
+
+  #   puts "Guesses Remaining: #{10 - @guesses}"
+  #   print "Guess: "
+  #   gets.chomp
+  # end
+
+  def make_a_guess 
     if @guesses > 0
       puts "Score: #{@score}"
-    else
-      puts
-    end
+      puts "Guesses Remaining: #{10 - @guesses}"
+      puts "Answer: #{@answer}"
 
-    puts "Guesses Remaining: #{10 - @guesses}"
-    print "Guess: "
-    gets.chomp
+      @possible_answers.keep_if { |answer| @all_scores[@guess][answer] == @score }
+      guesses = @possible_scores.map do |guess, scores_by_answer|
+        scores_by_answer = scores_by_answer.select { |answer, score| @possible_answers.include?(answer) }
+        @possible_scores[guess] = scores_by_answer
+        score_groups = scores_by_answer.values.group_by(&:itself)
+        possibility_counts = score_groups.values.map(&:length)
+        worst_case_possibilities = possibility_counts.max
+        impossible_guess = @possible_answers.include?(guess) ? 0 : 1
+        [worst_case_possibilities, impossible_guess, guess]
+      end
+      puts "Guess: #{guesses.min.last}"
+      guesses.min.last 
+    else
+      "1122"
+    end
   end
 end
-                                                                
+
+game  = TutoAlgo.new
+game.play
