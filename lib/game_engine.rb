@@ -38,6 +38,7 @@ class GameEngine < Mastermind
     @@game = gets.chomp
     puts "loading..."
     computer = Computer.new
+    computer.init
     10.times do
       computer.play
       game_cheat
