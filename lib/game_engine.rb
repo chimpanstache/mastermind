@@ -26,7 +26,7 @@ class GameEngine < Mastermind
       output
       if @@score == "BBBB"
         puts 'You win!'
-        break
+        return
       end
     end
     puts 'You lost!' if @@score != "BBBB"
