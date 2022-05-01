@@ -10,7 +10,7 @@ black meaning you guessed a good number, at the good position.
 white meaning you guessed a good number, but at the wrong position.
 
 ## How to play
-You must have a ruby version installed on your machine.
-Execute the scrypt.
-At the first question, enter "creator" or "guesser" depending on the type of gameplay you're choosing.
+You must have a ruby version installed on your machine.  
+Execute the scrypt.  
+At the first question, enter "creator" or "guesser" depending on the type of gameplay you're choosing.  
 Then enter your 4 number combination, without formatting, like this e.g. : "1156".
